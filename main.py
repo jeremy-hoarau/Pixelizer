@@ -1,24 +1,30 @@
 import cv2
 import numpy as np
+import os
+from pathlib import Path
 
 def get_closest_color(colors, color):
     colors = np.array(colors)
     color = np.array(color)
     distances = np.sqrt(np.sum((colors - color) ** 2, axis=1))
     index_of_smallest = np.where(distances == np.amin(distances))
-    smallest_distance = colors[index_of_smallest][0]
-    return smallest_distance
+    closest_color = colors[index_of_smallest][0]
+    return closest_color
 
 # PARAMS --------------------------------
 pixelation = 64
 last_color_palette_index = 5
 img_index = 0
 use_palette = True
+save_image = True
+saved_image_name = "image"
+override_existing_files = False
 # ---------------------------------------
 
-
+#loop on each palette to have different renders
 for palette_index in range(last_color_palette_index + 1):
     color_palette = []
+    print(palette_index)
     color_palette_img = cv2.imread('./color_palettes/color_palette_' + str(palette_index) + '.png')
     for y in range(color_palette_img.shape[0]):
         for x in range(color_palette_img.shape[1]):
@@ -66,6 +72,14 @@ for palette_index in range(last_color_palette_index + 1):
             offset[0] = 0
             offset[1] += target_resolution
 
-
     cv2.imshow('render ' + str(palette_index), new_img)
+    if(save_image):
+        img_name = saved_image_name+"_"+str(palette_index)+".png"
+        path = Path('./output/'+img_name)
+        if override_existing_files == False and path.is_file():
+            print("Error: file already exists")
+        else:
+            cv2.imwrite("./output/"+saved_image_name+"_"+str(palette_index)+".png", new_img)
+            print("Image saved")
+
 cv2.waitKey(0)
