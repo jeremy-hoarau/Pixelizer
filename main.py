@@ -11,9 +11,9 @@ def get_closest_color(colors, color):
     return closest_color
 
 # PARAMS --------------------------------
-pixelation = 128
+pixelation = 32
 last_color_palette_index = 7
-img_index = 3
+img_index = 11
 use_palette = True
 save_image = False
 saved_image_name = "image"
