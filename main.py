@@ -11,23 +11,23 @@ def get_closest_color(colors, color):
     return closest_color
 
 # PARAMS --------------------------------
-pixelation = 64
-last_color_palette_index = 5
-img_index = 0
+pixelation = 128
+last_color_palette_index = 7
+img_index = 3
 use_palette = True
-save_image = True
+save_image = False
 saved_image_name = "image"
 override_existing_files = False
 # ---------------------------------------
 
 #loop on each palette to have different renders
-for palette_index in range(last_color_palette_index + 1):
-    color_palette = []
-    print(palette_index)
-    color_palette_img = cv2.imread('./color_palettes/color_palette_' + str(palette_index) + '.png')
-    for y in range(color_palette_img.shape[0]):
-        for x in range(color_palette_img.shape[1]):
-            color_palette.append(color_palette_img[y][x])
+for palette_index in range(last_color_palette_index + 2):
+    if(palette_index != last_color_palette_index + 1):
+        color_palette = []
+        color_palette_img = cv2.imread('./color_palettes/color_palette_' + str(palette_index) + '.png')
+        for y in range(color_palette_img.shape[0]):
+            for x in range(color_palette_img.shape[1]):
+                color_palette.append(color_palette_img[y][x])
 
     image = cv2.imread('./input/img_'+str(img_index)+'.png')
     image = cv2.resize(image, (int(image.shape[1]/2), int(image.shape[0]/2)))
@@ -37,7 +37,6 @@ for palette_index in range(last_color_palette_index + 1):
     cv2.imshow('input image', image)
 
     new_img = np.zeros((resolution[0], resolution[1], 3), dtype=np.uint8)
-    new_img[20][200] = (255, 255, 255)
 
     offset = [0, 0]
 
@@ -56,7 +55,7 @@ for palette_index in range(last_color_palette_index + 1):
         else:
             new_pixel = pixel_sum
 
-        if use_palette:
+        if use_palette and palette_index != last_color_palette_index + 1:
             #apply color palette
             color = [new_pixel[0], new_pixel[1], new_pixel[2]]
             new_pixel = get_closest_color(color_palette, color)
