@@ -1,6 +1,5 @@
 import cv2
 import numpy as np
-import os
 from pathlib import Path
 
 def get_closest_color(colors, color):
