@@ -13,6 +13,7 @@ def get_closest_color(colors, color):
 pixelation = 64
 last_color_palette_index = 5
 img_index = 0
+use_palette = True
 # ---------------------------------------
 
 
@@ -50,9 +51,10 @@ for palette_index in range(last_color_palette_index + 1):
         else:
             new_pixel = pixel_sum
 
-        #apply color palette
-        color = [new_pixel[0], new_pixel[1], new_pixel[2]]
-        new_pixel = get_closest_color(color_palette, color)
+        if use_palette:
+            #apply color palette
+            color = [new_pixel[0], new_pixel[1], new_pixel[2]]
+            new_pixel = get_closest_color(color_palette, color)
 
         for y in range(target_resolution):
             for x in range(target_resolution):
