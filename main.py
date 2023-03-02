@@ -11,12 +11,12 @@ def get_closest_color(colors, color):
     return closest_color
 
 # PARAMS --------------------------------
-pixelation = 32
+pixelation = 128
 last_color_palette_index = 7
-img_index = 11
+img_index = 18
 use_palette = True
 save_image = False
-saved_image_name = "image"
+saved_image_name = "sakura"
 override_existing_files = False
 # ---------------------------------------
 
