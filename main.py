@@ -13,11 +13,11 @@ def get_closest_color(colors, color):
 # PARAMS --------------------------------
 pixelation = 128
 last_color_palette_index = 7
-img_index = 18
+img_index = 14
 use_palette = True
-save_image = False
-saved_image_name = "sakura"
-override_existing_files = False
+save_image = True
+saved_image_name = "sakura_landscape"
+override_existing_files = True
 # ---------------------------------------
 
 #loop on each palette to have different renders
